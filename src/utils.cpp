@@ -1,15 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
-#include <utils.h>
-
-#if defined(WIN32) || defined(_WIN32)
-#include <windows.h>
-#include <winsock2.h>
-#else
-#include <uuid/uuid.h>
-#include <sys/time.h>
-#include <iconv.h>
-#endif
+#include "utils.h"
 
 #if defined(WIN32) || defined(_WIN32)
 
@@ -193,7 +184,7 @@ std::string make_uuidstring() {
 			guid.Data4[0], guid.Data4[1], guid.Data4[2],
 			guid.Data4[3], guid.Data4[4], guid.Data4[5],
 			guid.Data4[6], guid.Data4[7]);
-	return G2U(buffer));
+	return std::string(buffer);
 #else
 	uuid_t uu;
 	uuid_generate(uu);

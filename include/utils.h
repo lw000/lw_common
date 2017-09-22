@@ -2,9 +2,13 @@
 #define __LW_UTIL_H__
 
 #if defined(WIN32) || defined(_WIN32)
+#include <winsock2.h>
 #include <windows.h>
 #include <process.h>
 #else
+#include <uuid/uuid.h>
+#include <sys/time.h>
+#include <iconv.h>
 #include <unistd.h>
 #endif
 
