@@ -42,13 +42,6 @@ private:
 	std::list<KV_T*> _kv;
 };
 
-class SocketInit final
-{
-public:
-	SocketInit();
-	~SocketInit();
-};
-
 unsigned int lw_make_software_version(unsigned char major, unsigned char minor, unsigned short build);
 void lw_software_version(unsigned int version, unsigned char &major, unsigned char &minor, unsigned short &build);
 unsigned char lw_major_version(unsigned int version);
