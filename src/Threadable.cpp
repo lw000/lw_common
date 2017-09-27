@@ -38,7 +38,7 @@ int Threadable::yield()
 #ifndef WIN32
 	return sched_yield();
 #else
-	SwitchToThread();
+	::SwitchToThread();
 #endif
 	return 0;
 }
@@ -69,7 +69,7 @@ static int startThread(void* (*threadFun) (void *), void *args)
 		return -1;
 	}
 
-	SetThreadPriority((HANDLE)threadHandler, THREAD_PRIORITY_NORMAL);
+	::SetThreadPriority((HANDLE)threadHandler, THREAD_PRIORITY_NORMAL);
 	return threadHandler;
 #endif
 }
@@ -86,6 +86,25 @@ void Threadable::join()
 	{
 		pthread_join(_threadId, NULL);
 	}
+#else
+	DWORD d = ::WaitForSingleObject((HANDLE)_threadId, INFINITE);
+	if (d == WAIT_FAILED) {
+		DWORD derror = GetLastError();
+		printf("WaitForSingleObject error. [%d]", derror);
+	}
+	else {
+		if (d == WAIT_OBJECT_0) {
+
+		} 
+		else if (d == WAIT_TIMEOUT) {
+
+		} else if (d == WAIT_ABANDONED) {
+
+		} 	
+		else {
+		
+		}
+	}
 #endif
 }
 
@@ -94,6 +113,6 @@ void Threadable::milliSleep(unsigned long milli)
 #ifndef WIN32
 	usleep(milli * 1000);
 #else
-	Sleep(milli);
+	::Sleep(milli);
 #endif
 }
