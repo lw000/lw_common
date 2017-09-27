@@ -4,7 +4,7 @@
 #include <string>
 #include <functional>
 
-class XXTea final
+class XXTea
 {
 public:
 	XXTea(const char* k);

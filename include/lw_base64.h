@@ -4,7 +4,7 @@
 #include <string>
 #include <functional>
 
-class Base64 final
+class Base64
 {
 public:
 	Base64();

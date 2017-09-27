@@ -3,7 +3,7 @@
 
 typedef long ssize_t;
 
-class Data final
+class Data
 {
 public:
 	static const Data Null;

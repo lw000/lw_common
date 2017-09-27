@@ -90,6 +90,12 @@
     <ClInclude Include="json\rapidjson\internal\strfunc.h">
       <Filter>json\rapidjson\internal</Filter>
     </ClInclude>
+    <ClInclude Include="include\getopt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lock.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base64.c">
@@ -123,6 +129,15 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\xxtea.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\getopt.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\getopt_long.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lock.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
