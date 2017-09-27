@@ -4,7 +4,7 @@
 #include "Data.h"
 #include <string>
 
-class FileUtils final
+class FileUtils
 {
 public:
 	static FileUtils* getInstance();
