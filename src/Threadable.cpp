@@ -1,27 +1,64 @@
 #include "Threadable.h"
 
-#ifndef WIN32
+#ifdef WIN32
+#include <windows.h>
+#include <process.h>
+#else
 #include <pthread.h>
 #include <unistd.h>
-#else
-#include <windows.h>
 #endif
 
 #include <stddef.h>
 #include <iostream>
 
+typedef unsigned int(__stdcall *ThreadFun) (void *);
+
 class CoreThread
 {
 public:
-	static void* __threadfunc(void *userdata)
+	static int __start(ThreadFun func, void *args)
+	{
+#ifndef WIN32
+		int hThread;
+		pthread_t recvthread;
+
+		hThread = pthread_create(&recvthread, NULL, func, args);
+		if (hThread != 0)
+		{
+			return -1;
+		}
+		else
+		{
+			pthread_detach(recvthread);
+		}
+
+		return recvthread;
+#else
+		unsigned int threadHandler;
+		unsigned int  threadId;
+		threadHandler = (int)_beginthreadex(NULL, 0, func, args, 0, &threadId);
+		if (threadHandler == -1) {
+			return -1;
+		}
+		::SetThreadPriority((HANDLE)threadHandler, THREAD_PRIORITY_NORMAL);
+
+		return threadHandler;
+#endif
+	}
+
+	static unsigned int __stdcall __thread_run(void *userdata)
 	{
 		Threadable *self = (Threadable *)userdata;
-		
+
 		self->onStart();
 		self->run();
 		self->onEnd();
 
-		return nullptr;
+#ifdef WIN32
+		::_endthreadex(0);
+#endif
+
+		return 0;
 	}
 };
 
@@ -35,58 +72,21 @@ Threadable::~Threadable(void)
 
 int Threadable::yield()
 {
-#ifndef WIN32
+#ifdef WIN32
+	return ::SwitchToThread();
+#else	
 	return sched_yield();
-#else
-	::SwitchToThread();
-#endif
-	return 0;
-}
-
-static int startThread(void* (*threadFun) (void *), void *args)
-{
-#ifndef WIN32
-	int hThread;
-	pthread_t recvthread;
-
-	hThread = pthread_create(&recvthread, NULL, threadFun, args);
-	if (hThread != 0)
-	{
-		return -1;
-	}
-	else
-	{
-		pthread_detach(recvthread);
-	}
-
-	return recvthread;
-
-#else
-	DWORD threadHandler;
-	DWORD  threadId;
-	threadHandler = (int)CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)threadFun, args, 0, &threadId);
-	if (threadHandler == -1) {
-		return -1;
-	}
-
-	::SetThreadPriority((HANDLE)threadHandler, THREAD_PRIORITY_NORMAL);
-	return threadHandler;
 #endif
 }
 
 void Threadable::start()
 {
-	_threadId = startThread(CoreThread::__threadfunc, this);
+	_threadId = CoreThread::__start(CoreThread::__thread_run, this);
 }
 
 void Threadable::join()
 {
-#ifndef WIN32
-	if (_threadId > 0)
-	{
-		pthread_join(_threadId, NULL);
-	}
-#else
+#ifdef WIN32
 	DWORD d = ::WaitForSingleObject((HANDLE)_threadId, INFINITE);
 	if (d == WAIT_FAILED) {
 		DWORD derror = GetLastError();
@@ -95,24 +95,33 @@ void Threadable::join()
 	else {
 		if (d == WAIT_OBJECT_0) {
 
-		} 
+		}
 		else if (d == WAIT_TIMEOUT) {
 
-		} else if (d == WAIT_ABANDONED) {
+		}
+		else if (d == WAIT_ABANDONED) {
 
-		} 	
+		}
 		else {
-		
+
 		}
 	}
+
+#else
+
+	if (_threadId > 0)
+	{
+		pthread_join(_threadId, NULL);
+	}
+
 #endif
 }
 
 void Threadable::milliSleep(unsigned long milli)
 {
-#ifndef WIN32
-	usleep(milli * 1000);
-#else
+#ifdef WIN32
 	::Sleep(milli);
+#else
+	usleep(milli * 1000);
 #endif
 }
