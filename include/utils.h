@@ -12,11 +12,42 @@
 #include <unistd.h>
 #endif
 
-#include <vector>
 #include <string>
-#include <unordered_map>
+#include <vector>
 #include <list>
+#include <unordered_map>
 #include <functional>
+
+#ifdef _WIN32
+//define something for Windows (32-bit and 64-bit, this part is common)
+#ifdef _WIN64
+//define something for Windows (64-bit only)
+#else
+//define something for Windows (32-bit only)
+#endif
+
+#elif __APPLE__
+#include "TargetConditionals.h"
+#if TARGET_IPHONE_SIMULATOR
+// iOS Simulator
+#elif TARGET_OS_IPHONE
+// iOS device
+#elif TARGET_OS_MAC
+// Other kinds of Mac OS
+#else
+#   error "Unknown Apple platform"
+#endif
+#elif __ANDROID__
+// android
+#elif __linux__
+// linux
+#elif __unix__ // all unices not caught above
+// Unix
+#elif defined(_POSIX_VERSION)
+// POSIX
+#else
+#   error "Unknown compiler"
+#endif
 
 #if defined(WIN32) || defined(_WIN32)
 #define lw_sleep(seconds) SleepEx(seconds * 1000, 1);
@@ -56,15 +87,15 @@ unsigned long lw_hash_code(const char* c);
 
 char * lw_strtok_r(char *s, const char *delim, char **state);
 
-std::vector<std::string> split(const char* str, const char* pattern);
+std::vector<std::string> lw_split(const char* str, const char* pattern);
 
-std::string make_uuidstring();
+std::string lw_make_uuidstring();
 
-std::unordered_map<std::string, std::string> split_url_pragma_data(const char* str);
+std::unordered_map<std::string, std::string> lw_split_url_pragma_data(const char* str);
 
-void trim(char* src, char* dest);
-void trim_l(char* src, char* dest);
-void trim_r(char* src, char* dest);
+void lw_trim(char* src, char* dest);
+void lw_trim_l(char* src, char* dest);
+void lw_trim_r(char* src, char* dest);
 
 #define lw_min(a,b) ((a)<(b)?(a):(b))
 

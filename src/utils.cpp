@@ -169,7 +169,7 @@ double gettime(void) {
 }
 #endif
 
-std::string make_uuidstring() {
+std::string lw_make_uuidstring() {
 #if defined(_WIN32) || defined(WIN32)
 	char buffer[64] = {0};
 	GUID guid;
@@ -364,7 +364,7 @@ void KVQueryUrlArgsValue::reset() {
 	_kv.clear();
 }
 
-std::vector<std::string> split(const char* str, const char* pattern) {
+std::vector<std::string> lw_split(const char* str, const char* pattern) {
 	char *p = NULL;
 	char *p1 = NULL;
 	p = lw_strtok_r(const_cast<char*>(str), pattern, &p1);
@@ -376,7 +376,7 @@ std::vector<std::string> split(const char* str, const char* pattern) {
 	return s;
 }
 
-std::unordered_map<std::string, std::string> split_url_pragma_data(
+std::unordered_map<std::string, std::string> lw_split_url_pragma_data(
 		const char* str) {
 	char *p = const_cast<char*>(str);
 	char *p0 = NULL;
@@ -405,7 +405,7 @@ std::unordered_map<std::string, std::string> split_url_pragma_data(
 	return s;
 }
 
-void trim(char* src, char* dest) {
+void lw_trim(char* src, char* dest) {
 	char* ps = src;
 	char* pe = src + strlen(src) - 1;
 
@@ -425,7 +425,7 @@ void trim(char* src, char* dest) {
 	*p = '\0';
 }
 
-void trim_l(char* src, char* dest) {
+void lw_trim_l(char* src, char* dest) {
 	char* ps = src;
 	char* pe = src + strlen(src) - 1;
 
@@ -441,7 +441,7 @@ void trim_l(char* src, char* dest) {
 	*p = '\0';
 }
 
-void trim_r(char* src, char* dest) {
+void lw_trim_r(char* src, char* dest) {
 	char* ps = src;
 	char* pe = src + strlen(src) - 1;
 

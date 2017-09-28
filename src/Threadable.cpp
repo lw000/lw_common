@@ -51,7 +51,7 @@ public:
 		Threadable *self = (Threadable *)userdata;
 
 		self->onStart();
-		self->run();
+		self->onRun();
 		self->onEnd();
 
 #ifdef WIN32

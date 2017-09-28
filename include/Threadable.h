@@ -19,7 +19,7 @@ public:
 
 protected:
 	virtual int onStart() = 0;
-	virtual int run() = 0;
+	virtual int onRun() = 0;
 	virtual int onEnd() = 0;
 
 private:
