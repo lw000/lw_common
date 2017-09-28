@@ -1,9 +1,30 @@
 #ifndef __lock_h__
+#define __lock_h__
 
-#ifdef _WIN32
-#include <Windows.h>
+#define _USE_POSIX_LOCK
+
+#if defined(_WIN32) || defined(WIN32)
+
+//#	if _MSC_VER <= 1600
+#		if defined(_USE_SYS_LOCK)
+			#include <Windows.h>
+#		elif defined(_USE_POSIX_LOCK)
+			#include <pthread.h>
+#		else
+			#include <Windows.h>
+#		endif
+
+//#	endif
+
 #else
 
+#	if defined(_USE_POSIX_LOCK)
+#		include <pthread.h>
+#	endif
+
+#endif
+
+#ifdef _USE_STDCPP_LOCK
 #endif
 
 class lw_lock_abstract
@@ -26,6 +47,7 @@ private:
 	lw_lock_abstract* _lock;
 };
 
+
 class lw_fast_lock : public lw_lock_abstract
 {
 public:
@@ -38,10 +60,14 @@ public:
 
 private:
 
-#ifdef _WIN32
+#if defined(_USE_SYS_LOCK)
 	CRITICAL_SECTION _cs;
+#elif defined(_USE_POSIX_LOCK)
+	pthread_mutex_t _t;
+#elif defined(_USE_STDCPP_LOCK)
+	std::mutex _t;
 #else
-
+	CRITICAL_SECTION _cs;
 #endif
 
 };
