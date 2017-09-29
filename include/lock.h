@@ -52,6 +52,7 @@ private:
 	lw_lock_abstract* _lock;
 };
 
+
 class lw_fast_lock : public lw_lock_abstract
 {
 public:
