@@ -11,7 +11,11 @@
 #include <stddef.h>
 #include <iostream>
 
-typedef unsigned int(__stdcall *ThreadFun) (void *);
+#ifdef _WIN32
+	typedef unsigned int(__stdcall *ThreadFun) (void *);
+#else
+	typedef void*(*ThreadFun) (void *);
+#endif
 
 class CoreThread
 {
@@ -46,6 +50,7 @@ public:
 #endif
 	}
 
+#ifdef _WIN32
 	static unsigned int __stdcall __thread_run(void *userdata)
 	{
 		Threadable *self = (Threadable *)userdata;
@@ -54,12 +59,22 @@ public:
 		self->onRun();
 		self->onEnd();
 
-#ifdef WIN32
 		::_endthreadex(0);
-#endif
-
 		return 0;
 	}
+#else
+	static void*  __thread_run(void *userdata)
+		{
+			Threadable *self = (Threadable *)userdata;
+
+			self->onStart();
+			self->onRun();
+			self->onEnd();
+
+			return 0;
+		}
+
+	#endif
 };
 
 Threadable::Threadable(void) : _threadId(-1)
@@ -81,7 +96,7 @@ int Threadable::yield()
 
 void Threadable::start()
 {
-	_threadId = CoreThread::__start(CoreThread::__thread_run, this);
+	_threadId = CoreThread::__start(&CoreThread::__thread_run, this);
 }
 
 void Threadable::join()
