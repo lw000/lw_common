@@ -1,8 +1,7 @@
 #include "lock.h"
 
-lw_lock_guard::lw_lock_guard(lw_lock_abstract* lock)
+lw_lock_guard::lw_lock_guard(lw_lock_abstract* lock) : _lock(lock)
 {
-	this->_lock = lock;
 	this->_lock->lock();
 }
 
@@ -17,7 +16,7 @@ lw_fast_lock::lw_fast_lock()
 	::InitializeCriticalSection(&this->_cs);
 #elif defined(_USE_POSIX_LOCK)
 	pthread_mutex_init(&_t, NULL);
-#endif	
+#endif
 }
 
 lw_fast_lock::~lw_fast_lock(void)
