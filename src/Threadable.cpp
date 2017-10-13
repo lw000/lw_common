@@ -12,15 +12,15 @@
 #include <iostream>
 
 #ifdef _WIN32
-	typedef unsigned int(__stdcall *ThreadFun) (void *);
+	typedef unsigned int(__stdcall *ThreadProcFunc) (void *);
 #else
-	typedef void*(*ThreadFun) (void *);
+	typedef void*(*ThreadProcFunc) (void *);
 #endif
 
 class CoreThread
 {
 public:
-	static int __start(ThreadFun func, void *args)
+	static int __start(ThreadProcFunc func, void *args)
 	{
 #ifndef WIN32
 		int hThread;
@@ -56,7 +56,9 @@ public:
 		Threadable *self = (Threadable *)userdata;
 
 		self->onStart();
+
 		self->onRun();
+
 		self->onEnd();
 
 		::_endthreadex(0);
@@ -64,17 +66,18 @@ public:
 	}
 #else
 	static void*  __thread_run(void *userdata)
-		{
-			Threadable *self = (Threadable *)userdata;
+	{
+		Threadable *self = (Threadable *)userdata;
 
-			self->onStart();
-			self->onRun();
-			self->onEnd();
+		self->onStart();
 
-			return 0;
-		}
+		self->onRun();
 
-	#endif
+		self->onEnd();
+
+		return 0;
+	}
+#endif
 };
 
 Threadable::Threadable(void) : _threadId(-1)
