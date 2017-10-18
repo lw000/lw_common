@@ -50,9 +50,9 @@
 #endif
 
 #if defined(WIN32) || defined(_WIN32)
-#define lw_sleep(seconds) SleepEx(seconds, 1);
+#define lw_sleep(mseconds) SleepEx(mseconds, 1);
 #else
-#define lw_sleep(seconds) usleep(seconds*1000);
+#define lw_sleep(mseconds) usleep(mseconds*1000);
 #endif
 
 struct KV_T
