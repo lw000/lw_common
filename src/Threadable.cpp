@@ -62,6 +62,7 @@ public:
 		self->onEnd();
 
 		::_endthreadex(0);
+
 		return 0;
 	}
 #else
