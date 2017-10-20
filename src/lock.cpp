@@ -47,3 +47,25 @@ void lw_fast_lock::unlock()
 
 #endif
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////
+lw_fast_cond::lw_fast_cond() {
+	pthread_cond_init(&_t, nullptr);
+}
+
+lw_fast_cond::~lw_fast_cond() {
+	pthread_cond_destroy(&_t);
+}
+
+void lw_fast_cond::wait(lw_fast_lock* lock) {
+	pthread_cond_wait(&_t, &lock->_t);
+}
+
+void lw_fast_cond::signal() {
+	pthread_cond_signal(&_t);
+}
+
+void lw_fast_cond::broadcast() {
+	pthread_cond_broadcast(&_t);
+}
+

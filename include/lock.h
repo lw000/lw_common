@@ -56,6 +56,7 @@ private:
 
 class lw_fast_lock : public lw_lock_abstract
 {
+	friend class lw_fast_cond;
 public:
 	lw_fast_lock();
 	virtual ~lw_fast_lock(void);
@@ -76,6 +77,22 @@ private:
 	CRITICAL_SECTION _cs;
 #endif
 
+};
+
+class lw_fast_cond {
+public:
+	lw_fast_cond();
+	~lw_fast_cond();
+
+public:
+	void wait(lw_fast_lock* lock);
+
+public:
+	void signal();
+	void broadcast();
+
+private:
+	pthread_cond_t _t;
 };
 
 
