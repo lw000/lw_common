@@ -1,6 +1,10 @@
 #ifndef __Threadable_h__
 #define __Threadable_h__
 
+#include <functional>
+
+typedef std::function<void()> ThreadHandler;
+
 class Threadable
 {
 	friend class CoreThread;
@@ -26,6 +30,23 @@ private:
 	int _threadId;
 };
 
+class ThreadableC11 : public Threadable
+{
+public:
+	ThreadableC11();
+	virtual ~ThreadableC11();
+
+public:
+	void start(const ThreadHandler& run);
+
+protected:
+	virtual int onStart() override;
+	virtual int onRun() override;
+	virtual int onEnd() override;
+
+private:
+	ThreadHandler _on_run;
+};
 
 #endif	// !__Threadable_h__
 

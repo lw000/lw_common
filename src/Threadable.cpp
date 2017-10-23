@@ -109,7 +109,7 @@ void Threadable::join()
 	DWORD d = ::WaitForSingleObject((HANDLE)_threadId, INFINITE);
 	if (d == WAIT_FAILED) {
 		DWORD derror = GetLastError();
-		printf("WaitForSingleObject error. [%d]", derror);
+		printf("WaitForSingleObject error. [%d] \n", derror);
 	}
 	else {
 		if (d == WAIT_OBJECT_0) {
@@ -125,9 +125,7 @@ void Threadable::join()
 
 		}
 	}
-
 #else
-
 	if (_threadId > 0)
 	{
 		pthread_join(_threadId, NULL);
@@ -143,4 +141,37 @@ void Threadable::milliSleep(unsigned long milli)
 #else
 	usleep(milli * 1000);
 #endif
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+ThreadableC11::ThreadableC11() {
+
+}
+
+ThreadableC11::~ThreadableC11() {
+
+}
+
+void ThreadableC11::start(const ThreadHandler& run) {
+	this->_on_run = run;
+	Threadable::start();
+}
+
+int ThreadableC11::onStart() {
+
+	return 0;
+}
+
+int ThreadableC11::onRun() {
+
+	if (this->_on_run != nullptr) {
+		this->_on_run();
+	}
+
+	return 0;
+}
+
+int ThreadableC11::onEnd() {
+
+	return 0;
 }
