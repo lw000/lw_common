@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{9c22e39c-b8c2-4ae3-8ad6-b4c6099f897b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{621a6087-bdde-44c5-9f3a-3949010c9398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json">
+      <UniqueIdentifier>{4e3725d0-67e6-4c47-a8ce-237af891b88a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json\rapidjson">
+      <UniqueIdentifier>{860d069e-f601-4a7b-8ac5-af0d7097910a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="json\rapidjson\internal">
+      <UniqueIdentifier>{f58964db-aa7c-467e-b817-8aff2abcb7c6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\cmdline.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common_marco.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\common_type.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Data.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FileUtils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\log4z.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lw_base64.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lw_xxtea.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\md5.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Threadable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="src\base64.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\xxtea.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\document.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\filestream.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\prettywriter.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\rapidjson.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\reader.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\stringbuffer.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\writer.h">
+      <Filter>json\rapidjson</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\internal\pow10.h">
+      <Filter>json\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\internal\stack.h">
+      <Filter>json\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="json\rapidjson\internal\strfunc.h">
+      <Filter>json\rapidjson\internal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\getopt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\lock.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\base64.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Data.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FileUtils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\log4z.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lw_base64.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lw_xxtea.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\md5.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\md5hl.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Threadable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\xxtea.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\getopt.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\getopt_long.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

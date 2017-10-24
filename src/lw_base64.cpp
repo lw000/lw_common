@@ -16,13 +16,13 @@ Base64::~Base64()
 {
 }
 
-int Base64::encrypt(const char* filename, std::function<void(char * out, unsigned int len)> func)
+int Base64::encrypt(const char* filename, const std::function<void(char * out, unsigned int len)>& func)
 {
 	Data d = FileUtils::getInstance()->getDataFromFile(filename);
 	return this->encrypt(d.getBytes(), d.getSize(), func);
 }
 
-int Base64::encrypt(unsigned char *data, unsigned int data_len, std::function<void(char * out, unsigned int len)> func)
+int Base64::encrypt(unsigned char *data, unsigned int data_len, const std::function<void(char * out, unsigned int len)>& func)
 {
 	unsigned int len;
 	char* out;
@@ -32,13 +32,13 @@ int Base64::encrypt(unsigned char *data, unsigned int data_len, std::function<vo
 	return 0;
 }
 
-int Base64::decrypt(const char* filename, std::function<void(unsigned char * out, unsigned int len)> func)
+int Base64::decrypt(const char* filename, const std::function<void(unsigned char * out, unsigned int len)>& func)
 {
 	Data d = FileUtils::getInstance()->getDataFromFile(filename);
 	return this->decrypt(d.getBytes(), d.getSize(), func);
 }
 
-int Base64::decrypt(unsigned char *data, unsigned int data_len, std::function<void(unsigned char * out, unsigned int len)> func)
+int Base64::decrypt(unsigned char *data, unsigned int data_len, const std::function<void(unsigned char * out, unsigned int len)>& func)
 {
 	unsigned int len;
 	unsigned char* out;

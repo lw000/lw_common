@@ -26,7 +26,7 @@ void XXTea::encrypt(const char* filename, const char* outfilename)
 	});
 }
 
-void XXTea::encrypt(unsigned char *data, unsigned int data_len, std::function<void(unsigned char * out, unsigned int len)> func)
+void XXTea::encrypt(unsigned char *data, unsigned int data_len, const std::function<void(unsigned char * out, unsigned int len)>& func)
 {
 	unsigned int len;
 	unsigned char* out;
@@ -46,7 +46,7 @@ void XXTea::decrypt(const char* filename, const char* outfilename)
 	});
 }
 
-void XXTea::decrypt(unsigned char *data, unsigned int data_len, std::function<void(unsigned char * out, unsigned int len)> func)
+void XXTea::decrypt(unsigned char *data, unsigned int data_len, const std::function<void(unsigned char * out, unsigned int len)>& func)
 {
 	unsigned int len;
 	unsigned char* out;

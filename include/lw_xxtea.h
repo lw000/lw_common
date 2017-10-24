@@ -12,10 +12,10 @@ public:
 
 public:
 	void encrypt(const char* filename, const char* outfilename);
-	void encrypt(unsigned char *data, unsigned int data_len, std::function<void(unsigned char * out, unsigned int len)> func);
+	void encrypt(unsigned char *data, unsigned int data_len, const std::function<void(unsigned char * out, unsigned int len)>& func);
 
 	void decrypt(const char* filename, const char* outfilename);
-	void decrypt(unsigned char *data, unsigned int data_len, std::function<void(unsigned char * out, unsigned int len)> func);
+	void decrypt(unsigned char *data, unsigned int data_len, const std::function<void(unsigned char * out, unsigned int len)>& func);
 
 private:
 	std::string k;
