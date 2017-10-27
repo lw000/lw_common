@@ -96,6 +96,9 @@
     <ClInclude Include="include\lock.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\tinyxml2.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\base64.c">
@@ -138,6 +141,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\lock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml2.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

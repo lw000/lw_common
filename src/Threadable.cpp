@@ -87,12 +87,7 @@ Threadable::Threadable(void) : _threadId(-1)
 
 Threadable::~Threadable(void)
 {
-#ifdef WIN32
-	::WaitForSingleObject((HANDLE)_threadId, INFINITE);
-	::CloseHandle((HANDLE)_threadId);
-#else	
-
-#endif
+	this->join();
 }
 
 int Threadable::yield()
@@ -136,7 +131,6 @@ void Threadable::join()
 	{
 		pthread_join(_threadId, NULL);
 	}
-
 #endif
 }
 

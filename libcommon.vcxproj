@@ -32,6 +32,7 @@
     <ClInclude Include="include\lw_xxtea.h" />
     <ClInclude Include="include\md5.h" />
     <ClInclude Include="include\Threadable.h" />
+    <ClInclude Include="include\tinyxml2.h" />
     <ClInclude Include="include\utils.h" />
     <ClInclude Include="json\rapidjson\document.h" />
     <ClInclude Include="json\rapidjson\filestream.h" />
@@ -59,6 +60,7 @@
     <ClCompile Include="src\md5.c" />
     <ClCompile Include="src\md5hl.c" />
     <ClCompile Include="src\Threadable.cpp" />
+    <ClCompile Include="src\tinyxml2.cpp" />
     <ClCompile Include="src\utils.cpp" />
     <ClCompile Include="src\xxtea.c" />
   </ItemGroup>
