@@ -47,11 +47,11 @@ public:
 class lw_fast_lock_guard
 {
 public:
-	lw_fast_lock_guard(lw_fast_lock_abstract* lock);
+	lw_fast_lock_guard(lw_fast_lock_abstract& lock);
 	~lw_fast_lock_guard(void);
 
 private:
-	lw_fast_lock_abstract* _lock;
+	lw_fast_lock_abstract& _lock;
 };
 
 class lw_fast_mutex : public lw_fast_lock_abstract
@@ -102,7 +102,7 @@ public:
 	~lw_fast_cond();
 
 public:
-	void wait(lw_fast_mutex* lock);
+	void wait(lw_fast_mutex& lock);
 
 public:
 	void signal();

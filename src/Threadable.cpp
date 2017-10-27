@@ -87,6 +87,12 @@ Threadable::Threadable(void) : _threadId(-1)
 
 Threadable::~Threadable(void)
 {
+#ifdef WIN32
+	::WaitForSingleObject((HANDLE)_threadId, INFINITE);
+	::CloseHandle((HANDLE)_threadId);
+#else	
+
+#endif
 }
 
 int Threadable::yield()
@@ -109,7 +115,7 @@ void Threadable::join()
 	DWORD d = ::WaitForSingleObject((HANDLE)_threadId, INFINITE);
 	if (d == WAIT_FAILED) {
 		DWORD derror = GetLastError();
-		printf("WaitForSingleObject error. [%d] \n", derror);
+		printf("join error. [%d] \n", derror);
 	}
 	else {
 		if (d == WAIT_OBJECT_0) {

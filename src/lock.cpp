@@ -1,13 +1,13 @@
 #include "lock.h"
 
-lw_fast_lock_guard::lw_fast_lock_guard(lw_fast_lock_abstract* lock) : _lock(lock)
+lw_fast_lock_guard::lw_fast_lock_guard(lw_fast_lock_abstract& lock) : _lock(lock)
 {
-	this->_lock->lock();
+	this->_lock.lock();
 }
 
 lw_fast_lock_guard::~lw_fast_lock_guard(void)
 {
-	this->_lock->unlock();
+	this->_lock.unlock();
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////
@@ -112,9 +112,9 @@ lw_fast_cond::~lw_fast_cond() {
 	
 }
 
-void lw_fast_cond::wait(lw_fast_mutex* lock) {
+void lw_fast_cond::wait(lw_fast_mutex& lock) {
 #if defined(_USE_SYS_LOCK)
-	SleepConditionVariableCS(&_t, &lock->_t, INFINITE);
+	SleepConditionVariableCS(&_t, &lock._t, INFINITE);
 #elif defined(_USE_POSIX_LOCK)
 	pthread_cond_wait(&_t, &lock->_t);
 #else
