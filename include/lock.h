@@ -1,8 +1,8 @@
 #ifndef __lock_h__
 #define __lock_h__
 
-#define _USE_SYS_LOCK
-//#define _USE_POSIX_LOCK
+//#define _USE_SYS_LOCK
+#define _USE_POSIX_LOCK
 
 #if defined(_WIN32) || defined(WIN32)
 
