@@ -97,6 +97,7 @@ static const char *const LOG_STRING[]=
     "LOG_ALARM",
     "LOG_FATAL",
 };
+
 static const size_t LOG_STRING_LEN[] =
 {
     sizeof("LOG_TRACE") - 1,
